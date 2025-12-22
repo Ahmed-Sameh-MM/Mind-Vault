@@ -14,9 +14,16 @@ datasource db {
 }
 
 model Items {
-  id          Int      @id @default(autoincrement())
-  createdAt   DateTime @default(now())
-  name        String   @unique
+  id          Int       @id @default(autoincrement())
+  createdAt   DateTime  @default(now())
+  name        String    @unique
   description String
-  class       String
+  classId     Int
+  class       ItemClass @relation(fields: [classId], references: [id])
+}
+
+model ItemClass {
+  id    Int     @id @default(autoincrement())
+  name  String  @unique
+  items Items[]
 }
