@@ -13,3 +13,16 @@ export async function addItem(formData: FormData) {
 
     console.log(`Added Item ID Result: ${result.id}`);
 }
+
+export async function addItemCategory(formData: FormData) {
+
+    console.log(`formData: ${formData}`);
+
+    const result = await prisma.itemCategory.create({
+        data: {
+            name: formData.get("name") as string,
+        }
+    });
+
+    console.log(`Added ItemCategory ID Result: ${result.id}`);
+}

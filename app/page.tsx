@@ -1,4 +1,5 @@
 import { Button } from "@/components/button"
+import { Input } from "@/components/input"
 import { LabeledInput } from "@/components/labeled_input"
 import { Label } from "@/components/label"
 import {
@@ -8,8 +9,18 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/select"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogFooter,
+  DialogClose,
+} from "@/components/dialog"
 
-import { addItem } from "./db/actions";
+import { addItem, addItemCategory } from "./db/actions";
 import { ItemCategory, ItemCategorySchema } from "./model_classes/item_category";
 
 import { Plus } from "lucide-react";
@@ -62,21 +73,51 @@ export default async function Home() {
           </SelectTrigger>
           <SelectContent>
             {itemCategories.map(cls => (
-              <SelectItem value={String(cls.id)}>{cls.name}</SelectItem>
+              <SelectItem key={cls.id} value={String(cls.id)}>{cls.name}</SelectItem>
             ))}
           </SelectContent>
         </Select>
 
         <br />
 
-        <Button variant={"outline"} size="icon">
-          <Plus />
-        </Button>
-
-        <br />
-
-        <Button variant={"outline"} type="submit">Add Item</Button>
+        <Button variant="outline" type="submit">Add Item</Button>
       </form>
+
+      <br />
+      
+      <Dialog>
+        <DialogTrigger asChild>
+          <Button variant="outline" size="icon">
+            <Plus />
+          </Button>
+        </DialogTrigger>
+        
+        <DialogContent className="sm:max-w-[425px]">
+          <form action={addItemCategory}>
+            <DialogHeader>
+              <DialogTitle>Add Category</DialogTitle>
+            </DialogHeader>
+
+            <div className="grid gap-4">
+              <div className="grid gap-3">
+                <Input
+                  name="name"
+                  id="item_category_input"
+                  type="text"
+                  placeholder="Enter a new Category Here!"
+                />
+              </div>
+            </div>
+
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="outline">Cancel</Button>
+              </DialogClose>
+              <Button type="submit">Add</Button>
+            </DialogFooter>
+          </form>
+        </DialogContent>
+      </Dialog>
     </main>
   );
 }
