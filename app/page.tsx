@@ -1,29 +1,17 @@
-import { Button } from "@/components/button"
-import { Input } from "@/components/input"
+import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label"
 import { LabeledInput } from "@/components/labeled_input"
-import { Label } from "@/components/label"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/select"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-  DialogFooter,
-  DialogClose,
-} from "@/components/dialog"
+} from "@/components/ui/select"
+import { AddCategoryDialog } from "@/components/features/categories/add_category_dialog";
 
-import { addItem, addItemCategory } from "./db/actions";
+import { addItem } from "./db/actions";
 import { ItemCategory, ItemCategorySchema } from "./model_classes/item_category";
-
-import { Plus } from "lucide-react";
 
 export default async function Home() {
 
@@ -51,6 +39,7 @@ export default async function Home() {
           id="item_name_input"
           type="text"
           placeholder="Enter Name Here!"
+          required
         />
 
         <br />
@@ -85,39 +74,7 @@ export default async function Home() {
 
       <br />
       
-      <Dialog>
-        <DialogTrigger asChild>
-          <Button variant="outline" size="icon">
-            <Plus />
-          </Button>
-        </DialogTrigger>
-        
-        <DialogContent className="sm:max-w-[425px]">
-          <form action={addItemCategory}>
-            <DialogHeader>
-              <DialogTitle>Add Category</DialogTitle>
-            </DialogHeader>
-
-            <div className="grid gap-4">
-              <div className="grid gap-3">
-                <Input
-                  name="name"
-                  id="item_category_input"
-                  type="text"
-                  placeholder="Enter a new Category Here!"
-                />
-              </div>
-            </div>
-
-            <DialogFooter>
-              <DialogClose asChild>
-                <Button variant="outline">Cancel</Button>
-              </DialogClose>
-              <Button type="submit">Add</Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <AddCategoryDialog />
     </main>
   );
 }

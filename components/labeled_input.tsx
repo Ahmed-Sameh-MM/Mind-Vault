@@ -1,5 +1,5 @@
-import { Input, InputProps } from "@/components/input"
-import { Label } from "@/components/label"
+import { Input, InputProps } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 function LabeledInput(
   {label, id, ...props} : {label: string} & InputProps) {

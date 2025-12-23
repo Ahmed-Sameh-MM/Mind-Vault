@@ -17,7 +17,7 @@ model Item {
   id          Int       @id @default(autoincrement())
   createdAt   DateTime  @default(now())
   name        String    @unique
-  description String
+  description String?
   categoryId  Int
   category    ItemCategory @relation(fields: [categoryId], references: [id])
 
