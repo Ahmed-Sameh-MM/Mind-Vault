@@ -17,9 +17,9 @@ async function getItems(): Promise<Item[]> {
     return ItemSchema.array().parse(items);
 }
 
-const items = await getItems();
+export default async function ItemList({ itemCategories }: { itemCategories: ItemCategory[] }) {
 
-export default function ItemList({ itemCategories }: { itemCategories: ItemCategory[] }) {
+  const items = await getItems();
 
   // Map categoryId -> categoryName
   const categoryMap = itemCategories.reduce((acc, cat) => {
